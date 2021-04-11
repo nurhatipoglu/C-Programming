@@ -1,0 +1,325 @@
+//pointer of pointer Ã¶rnek 
+#include <stdio.h>
+
+void inc_ptr(int **h)
+{ *h = *h + 1; }
+
+main(){
+
+int A[3] = {50, 60, 70};
+int* q = A;
+printf("q icerigi=%p gÃ¶sterdigi deger=%d\n ",q,*q);
+
+inc_ptr(&q);
+printf("q icerigi=%p gÃ¶sterdigi deger=%d\n ",q,*q);
+}
+
+ 
+ #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+
+void zaratama(int zar[])
+{
+int i,j,k=0,birinci,ikinci;//k kaÃ§ tane kombinasyon olduÄŸunu tutuyo,birinci ve ikinci kombinasyonlar ne geldiyse onu yazÄ±yo Ã¶rneÄŸin 1-2 geldi bunu numara[1][2] artÄ±rarak kombinasyon..
+int numara[6][6]={0}; // tabibini saÄŸlÄ±yo,numara dizisi hangi kombinsayonda kaÃ§ tane gelmiÅŸ onu tutuyo
+srand(time(0));
+
+for(i=0;i<100;i++) //100 atÄ±ÅŸa kadar devam edilir
+{
+birinci=rand()%6;//ilk zar atÄ±lÄ±r
+ikinci=rand()%6;//ikinci zar atÄ±lÄ±r
+numara[birinci][ikinci]++;//birinci ve ikinci atÄ±lan zarÄ±n kombinasyonu ilgili diziyi 1 arttÄ±rarak gÃ¼ncellenir
+}
+for(i=0;i<6;i++)
+{ //hangi komninasyonun kaÃ§ defa geldiÄŸi ekrana yazÄ±lÄ±r
+for(j=0;j<6;j++)
+{
+zar[k]=numara[i][j]; k++; // zarlarÄ±n gelme sÄ±klÄ±ÄŸÄ± tutulur
+printf("%d-%d gelme sayisi:%d ",(i+1),(j+1),numara[i][j]);
+}
+printf("\n\n");
+}
+}
+
+void zarkarsilastirma(int *zarptr) //karÅŸÄ±laÅŸtÄ±rmak iÃ§in zar kombinasyonunu iÃ§eren dizinin pointeri alÄ±nÄ±r
+{
+int buyuk=0,i,k,m; //buyuk deÄŸeri tutmasÄ± iÃ§in ve k,m deÄŸiÅŸkenleri de hangi kombinasyondan geliyorlarsa onu bulmak iÃ§in
+for(i=0;i<36;i++) // 36 kombinasyon dÃ¶ngÃ¼ye alÄ±nÄ±r
+{
+if(*(zarptr+i)>buyuk)//pointerdaki deÄŸer buyuk deÄŸiÅŸkeni ile sÄ±nanÄ±r
+{buyuk=*(zarptr+i);//buyukse buyuk deÄŸiÅŸkenine atanÄ±r
+k=(i/6)+1; //ilk zarÄ±n rakamÄ± tutulut. Ã¶rneÄŸin 25.dizi elemanÄ± koyarsak k=5 yani ilk zarÄ±n 5 gelme durumu
+m=(i%6)+1;// burda da ikinci zarÄ±n kaÃ§ geldiÄŸi tutulur 25 iÃ§in k=2 yani yazarken Ã§ok gelen kombinasyon 5-2 olarak yazÄ±lacak
+}
+}
+printf("En cok gelen kombinasyon %d-%d sayisi : %d \n\n",k,m,buyuk);//deÄŸerler ekrana yazÄ±lÄ±r
+}
+
+int main()
+{
+int d[100],z[36]={0};
+int deger;
+int *ptr,*ptr2;
+int *zarptr;
+
+
+zaratama(z);//zar komninasyonlarÄ±nÄ±n atanmasÄ± iÃ§in dizi atÄ±lÄ±r ve ekrana yazdÄ±rÄ±lÄ±r
+zarptr=z;//dizi pointere alÄ±nÄ±r
+zarkarsilastirma(zarptr); //zarlar kÄ±yaslanÄ±r ve en fazla gelen kombinasyon yazÄ±lÄ±r
+
+
+}
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+double* maxAdr(double a[], int boyut) { 
+double ebd = a[0]; 
+double *eba = &a[0]; int i; 
+for(i=1; i<boyut; i++) {
+if(a[i]>ebd) { 
+ebd = a[i]; 
+eba=&a[i];
+} 
+} return eba; 
+} 
+int main ( ) {
+
+double x [6] ={1,2,3,4,5,6};
+ double *p;
+  int k;
+ 
+ for (k=0; k<6; k++) 
+printf ( "\n %d %f %p " ,k,x[k], &x[k]);
+ 
+ p = maxAdr (x, 6) ;
+ printf("\n En buyuk deger =%f",*p);
+ printf("\n En buyuk degerin adresi =%p",p);}
+ 
+
+
+
+
+#include <stdio.h> 
+
+#include <stdlib.h> 
+
+ 
+
+int main() 
+
+{ 
+    int kutle[5] = {5, 10, 15, 20, 25}; 
+    int *p; 
+    p = kutle; 
+    printf("*p degeri = %d\n", *p); 
+    
+     kutle[0]=*(p+1)+10;
+      printf("yeni  degeri = %d\n", kutle[0]);
+	     printf("*(p + 1) degeri = %d\n", *(p + 1)); 
+
+    printf("*(p + 2) degeri = %d\n", *(p + 2)); 
+
+    printf("*(p + 3) degeri = %d\n", *(p + 3)); 
+
+    printf("*(p + 4) degeri = %d\n", *(p + 4)); 
+
+ 
+
+} 
+#include <stdio.h>
+
+void inc_ptr(int **h)
+{ *h = *h + 1; }
+
+main(){
+
+int A[3] = {50, 60, 70};
+int* q = A;
+printf("q icerigi=%p gÃ¶sterdigi deger=%d\n ",q,*q);
+
+inc_ptr(&q);
+printf("q icerigi=%p gÃ¶sterdigi deger=%d\n ",q,*q);
+}
+
+
+
+
+
+#include <stdio.h>
+void display_array (const int *p, int size)
+{
+while (size--)
+printf("%d ", *p++);
+}
+int main()
+{
+int a[5] = {3, 8, 7, 6, 10};
+display_array(a, 5);
+return 0;
+}
+
+#include <stdio.h> 
+
+#include <stdlib.h> 
+
+
+float OrtalamaBul(float *pdizi, int n); 
+
+int main() 
+
+{ 
+    float ortalama = 0; 
+    float b[] = {10, 20, 30, 40, 50}; 
+
+    ortalama = OrtalamaBul(b, 5); 
+
+    printf("Ortalama: %f", ortalama); 
+
+    return 0; 
+
+} 
+
+float OrtalamaBul(float *pdizi, int n) 
+
+{ 
+    int i; 
+    float toplam = 0; 
+    for(i=0; i<n; i++) 
+    { 
+
+       toplam += *(pdizi + i); 
+    } 
+
+
+    return (toplam / n); 
+
+} 
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int* MinSayiBul(int a[], int boyut) ;
+
+int main()
+{
+    int a[5] = {4, 7, -3, -5, 9} ;
+    int *p, k;
+
+ // indis, dizi ve adresini ekrana bas
+    for(k=0; k<5; k++)
+        printf("%d \t %d \t %p\n", k, a[k], &a[k]);
+
+    p = MinSayiBul(a,5);
+
+    printf("\nEn kucuk deger: %d\n", *p);
+    printf("En kucuk adres: %p \n",  p);
+    return 0;
+}
+
+int* MinSayiBul(int a[], int boyut)
+{
+    int i;
+    int ek, *pek;
+
+    ek = a[0];
+    for (i = 1; i < boyut; i++)
+    {
+        if ((*(a+i)) < ek)
+        {
+            ek = *(a+i);
+            pek = (a + i);
+        }
+    }
+    return pek;
+}
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 10
+
+#include <stdio.h>
+void display_array (const int *p, int size)
+{
+int i;
+for (i = 0; i < size; ++i)
+printf("%d ", p[i]);
+}
+
+void set_random_array(int *ptr, int size, int max_val)
+{
+int k;
+for (k = 0; k < size; ++k)
+ptr[k] = rand() % (max_val + 1);
+}
+
+int sum_array(const int *ptr, int size)
+{
+int sum = 0;
+int k;
+for (k = 0; k < size; ++k)
+sum += ptr[k];
+return sum;
+}
+
+int max_array(const int *ptr, int size)
+{
+int max = *ptr;
+int k;
+for (k = 1; k < size; ++k)
+if (ptr[k] > max)
+max = ptr[k];
+return max;
+}
+
+int min_array(const int *ptr, int size)
+{
+int min = *ptr;
+int k;
+for (k = 1; k < size; ++k)
+if (ptr[k] < min)
+min = ptr[k];
+return min;
+}
+
+
+void sort_array(int *ptr, int size)
+{
+int i, k, temp;
+for (i = 0; i < size - 1; ++i)
+for (k = 0; k < size - 1 - i; ++k)
+if (ptr[k] > ptr[k + 1]) {
+temp = ptr[k];
+ptr[k] = ptr[k + 1];
+ptr[k + 1] = temp;
+}
+}
+
+
+
+int main()
+{
+int a[SIZE];
+srand(time(0));
+set_random_array(a, SIZE, 100);
+printf("dizi 0 - 1000 araliginda rastgele sayilarla dolduruldu!\n");
+printf("dizi yazdiriliyor!\n");
+display_array(a, SIZE);
+printf("dizinin toplami = %d\n", sum_array(a, SIZE));
+printf("dizinin en buyuk elemani = %d\n", max_array(a, SIZE));
+printf("dizinin en kucuk elemani = %d\n", min_array(a, SIZE));
+sort_array(a, SIZE);
+printf("dizi siralama isleminden sonra yazdiriliyor!\n");
+display_array(a, SIZE);
+return 0;
+}

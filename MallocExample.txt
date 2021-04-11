@@ -1,0 +1,147 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+int *x,i,N,toplam=0;
+float ortalama;
+printf("Eleman sayisi ");
+scanf("%d",&N);
+x = (int *) malloc(N*sizeof(int));
+printf("adres=%p\n",x);
+
+printf("Elemanlari girin:\n");
+for(i=0;i<N;i++){
+   printf("%d.eleman adresi:%p = ",i+1,x+i);
+
+   scanf("%d",&x[i]);  
+    // x[i] ile *(x+i) aynÄ±      anlamda !
+    toplam += x[i];
+}
+free(x);  // ayrÄ±lan yer boÅŸaltÄ±lÄ±yor...
+ortalama = (float) toplam/N;
+printf("Bu %d sayinin ortlamasi %f dir\n",N,ortalama);         
+}
+
+
+
+
+
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+void generatearray(int *, int);  // 1-100 arasy rastgele de?erler kullanarak fonksiyona girilen de?er kadar elemany olan bir dizi olu?turan fonksiyondur.
+void printarray(int *, int);     // Pointeri verilen ve eleman sayysy girilen diziyi ekrana yazan fonksiyondur.
+void bubblesort(int *, int);     // Bubble sort algoritmasyny kullanarak pointeri girilen diziyi kÃ¼Ã§Ã¼kten bÃ¼yÃ¼?e syralayan fonksiyondur.
+int i, j, temp;					 // Ã‡o?u fonksiyonda kullanylan elemanlary burada tanymlamak daha avantajlydyr.
+
+int main() {
+	
+	int size;					 // size, dizinin boyutudur.
+	int array[100];				 // array, programda kullanylan dizidir.
+	int *ptrarray = &array[0];	 // ptrarray, array dizisinin pointeridir.
+
+	printf("Rastgele olusturulacak dizinin eleman sayisini giriniz: ");
+	scanf("%d",&size); 			 // scanf kullanylarak kullanycydan dizinin boyutu alynyr.
+	
+	ptrarray= (int*)malloc ((size) * sizeof(int));  // malloc komutu ile depolama alany israfyny Ã¶nlemek amacy ile dizinin boyutu kadar (size * sizeof(int)) Ã¶zel depolama alany aÃ§ylyr.
+	
+	generatearray(ptrarray,size); // generatearray Ã§a?rylarak dizi elemanlaryna rastgele de?erler atanyr.
+	printf("\nDizinin ilk hali: ");
+	printarray(ptrarray,size);	  // Dizinin ilk halini ekrana yazdyrmak iÃ§in printarray fonksiyonu Ã§a?rylyr.
+	bubblesort(ptrarray,size);	  // bubblesort fonksiyonu ile dizi kÃ¼Ã§Ã¼kten bÃ¼yÃ¼?e syralanyr.
+	printf("\n\nDizinin kucukten buyuge siralanmis hali: ");
+	printarray(ptrarray,size);	  // Dizinin son halini ekrana yazdyrmak iÃ§in printarray fonksiyonu Ã§a?rylyr.
+	
+	free(ptrarray);				  // malloc komutu ile aÃ§ylan Ã¶zel depolama alany free komutu ile serbest byrakylyr, tekrar kullanylabilir hale gelir.
+}
+void generatearray(int *ptr, int size) {	// Pointeri ve boyutu girilen dizinin elemanlaryna 1-100 arasy rastgele de?erler atar.
+
+	srand(time(NULL));			  // Her seferinde farkly rastgele de?erler Ã¼retilmesi iÃ§in bu satyr yazylyr.
+	for(i=0; i<size; i++)
+	{
+		*(ptr+i)=1+rand()%100;	  // DÃ¶ngÃ¼ iÃ§inde pointer ile tÃ¼m elemanlara rastgele de?er atanyr.
+	}
+}
+void printarray(int *ptr, int size) {  // Pointeri ve boyutu girilen dÃ¶ngÃ¼yÃ¼ ekrana yazdyrr.
+
+	for(i=0; i<size; i++)
+	{
+		printf("-%d-",*(ptr+i));
+	}
+}
+void bubblesort(int *ptr, int size) {
+/*  **********Bubble sort algoritmasy**********
+Her dizi elemany, kendisinden bir sonraki dizi elemany ile kar?yla?tyrylyr.
+E?er Kendisinden sonraki elemandan daha bÃ¼yÃ¼kse, bu iki elemanyn yerleri de?i?tirilir.
+Bu i?lem tekrar edilerek kÃ¼Ã§Ã¼kten bÃ¼yÃ¼?e syralanmy? bir dizi elde edilir.  */
+
+	for(i=0; i<size-1; i++)
+	{
+		for(j=0; j<size-i; j++)    // size-i ifadesinin kullanym amacy, bubble sort algoritmasy ile her adymyn sonunda, dizinin son elemany dizinin en bÃ¼yÃ¼k elemany olmasydyr. Yani bir sonraki adymda kullanylmasyna gerek kalmaz.
+		{								// O yÃ¼zden i?lem kalabaly?yny Ã¶nlemek iÃ§in her i 1 artyryldy?ynda, size de?eri 1 azalyr.(son eleman bir sonraki adymda kullanylmaz Ã§Ã¼nkÃ¼ olmasy gereken yerdedir.).
+			if(*(ptr+j) > *(ptr+j+1))   // if ko?ulunda i?lem syrasyndaki elemanyn kendisinden sonraki elemandan bÃ¼yÃ¼k olup olmady?yna bakylyr.
+			{
+				temp=*(ptr+j);			// E?er bÃ¼yÃ¼kse, temp olarak tanymlanan geÃ§ici eleman yardymy ile
+				*(ptr+j)=*(ptr+j+1);	// Bu iki elemanyn yerleri de?i?tirilir.
+				*(ptr+j+1)=temp;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    int i = 1, *ip = &i;
+ 
+    char *sports[] = {
+                         "golf",
+                         "hockey",
+                         "football",
+                         "cricket",
+                         "shooting"
+                     };
+ 
+    for(i = 0; i < 5; i++)
+    {
+        printf("String = %10s", sports[i] );
+        printf("\tAddress of string literal = %u\n", sports[i]);
+    }
+ 
+    // signal to operating system program ran fine
+    return 0;
+}
+
+ 
+*************************
+ 
+ 
+#include<stdio.h>
+int main()
+{
+const int a = 5;
+const int *ptr;
+ptr = &a;
+*ptr = 10;
+printf("%d\n", a);
+return 0;
+}
+
+#include<stdio.h>
+int main()
+{
+char *ptr;
+char string[] = "Cprogramlama ogrenmek icin calisiyorum";
+ptr = string;
+ptr += 8;
+printf("%s",ptr);
+return 0;
+}
